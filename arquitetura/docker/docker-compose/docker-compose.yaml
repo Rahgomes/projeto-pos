@@ -1,0 +1,23 @@
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    volumes:
+      - ./nginx-html:/usr/share/nginx/html
+
+  mongo:
+    image: mongo:latest
+    healthcheck:
+      test: "exit 0"
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - mongo_data:/data/db
+volumes:
+  mongo_data:
