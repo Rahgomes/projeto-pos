@@ -1,35 +1,41 @@
 import ErrorResponse from "../utils/errorResponse.js";
+import {
+  HTTP_STATUS,
+  ERROR_MESSAGES,
+  MONGOOSE_ERRORS,
+} from "../constants/index.js";
 
 const errorMiddleware = (err, _, res) => {
   let error = new ErrorResponse(
-    err.message || "Server error",
-    err.statusCode || 500
+    err.message || ERROR_MESSAGES.SERVER_ERROR,
+    err.statusCode || HTTP_STATUS.INTERNAL_SERVER_ERROR
   );
-
-  error.message = err.message;
 
   console.error(err);
 
-  // Mongoose bad ObjectId
-  if (err.name === "CastError") {
-    error = new ErrorResponse("Resource not found", 404);
+  if (err.name === MONGOOSE_ERRORS.CAST_ERROR) {
+    error = new ErrorResponse(
+      ERROR_MESSAGES.RESOURCE_NOT_FOUND,
+      HTTP_STATUS.NOT_FOUND
+    );
   }
 
-  // Mongoose duplicate key
-  if (err.code === 11000) {
+  if (err.code === MONGOOSE_ERRORS.DUPLICATE_KEY) {
     const field = Object.keys(err.keyValue)[0];
-    error = new ErrorResponse(`Duplicate value entered for ${field}`, 400);
+    error = new ErrorResponse(
+      `${ERROR_MESSAGES.DUPLICATE_KEY}: ${field}`,
+      HTTP_STATUS.BAD_REQUEST
+    );
   }
 
-  // Mongoose validation error
-  if (err.name === "ValidationError") {
+  if (err.name === MONGOOSE_ERRORS.VALIDATION_ERROR) {
     const messages = Object.values(err.errors).map((val) => val.message);
-    error = new ErrorResponse(messages.join(", "), 400);
+    error = new ErrorResponse(messages.join(", "), HTTP_STATUS.BAD_REQUEST);
   }
 
-  res.status(error.statusCode || 500).json({
+  res.status(error.statusCode).json({
     success: false,
-    error: error.message || "Server error",
+    error: error.message,
   });
 };
 
