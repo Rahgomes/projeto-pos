@@ -1,4 +1,4 @@
-import ErrorResponse from "../utils/errorResponse.js";
+import ErrorResponse from "../utils/errorResponse.util.js";
 import {
   HTTP_STATUS,
   ERROR_MESSAGES,
