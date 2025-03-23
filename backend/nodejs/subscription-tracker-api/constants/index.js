@@ -6,6 +6,7 @@ import {
   ERROR_MESSAGES,
   SUBSCRIPTION_MESSAGES,
   VALIDATION_MESSAGES,
+  USER_MESSAGES,
 } from "./messages.js";
 
 import {
@@ -30,4 +31,5 @@ export {
   CATEGORIES,
   STATUSES,
   REGEX,
+  USER_MESSAGES,
 };
