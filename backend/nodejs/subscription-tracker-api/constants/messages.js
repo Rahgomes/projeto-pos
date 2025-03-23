@@ -17,3 +17,11 @@ export const VALIDATION_MESSAGES = {
   START_DATE_PAST: "Start date must be in the past",
   RENEWAL_AFTER_START: "Renewal date must be after the start date",
 };
+
+export const USER_MESSAGES = {
+  NAME_REQUIRED: "User name is required",
+  EMAIL_REQUIRED: "User email is required",
+  INVALID_EMAIL: "Please provide a valid email address",
+  PASSWORD_REQUIRED: "User password is required",
+  PASSWORD_MIN_LENGTH: "Password must be at least 6 characters long",
+};

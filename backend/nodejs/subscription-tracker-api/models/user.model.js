@@ -1,26 +1,28 @@
 import mongoose from "mongoose";
 
+import { USER_MESSAGES, REGEX } from "../constants/index.js";
+
 const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "User name is required"],
+      required: [true, USER_MESSAGES.NAME_REQUIRED],
       trim: true,
       minLength: 2,
       maxLength: 50,
     },
     email: {
       type: String,
-      required: [true, "User email is required"],
+      required: [true, USER_MESSAGES.EMAIL_REQUIRED],
       unique: true,
       trim: true,
       lowercase: true,
-      match: [/\S+@\S+\.\S+/, "Please fill a valid email address"],
+      match: [REGEX.EMAIL, USER_MESSAGES.INVALID_EMAIL],
     },
     password: {
       type: String,
-      required: [true, "User password is required"],
-      minLength: 6,
+      required: [true, USER_MESSAGES.PASSWORD_REQUIRED],
+      minLength: [6, USER_MESSAGES.PASSWORD_MIN_LENGTH],
     },
   },
   { timestamps: true }

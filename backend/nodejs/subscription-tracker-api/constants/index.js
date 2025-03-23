@@ -16,6 +16,8 @@ import {
   STATUSES,
 } from "./subscription.constants.js";
 
+import { REGEX } from "./regex.constants.js";
+
 export {
   HTTP_STATUS,
   MONGOOSE_ERRORS,
@@ -27,4 +29,5 @@ export {
   FREQUENCIES,
   CATEGORIES,
   STATUSES,
+  REGEX,
 };
