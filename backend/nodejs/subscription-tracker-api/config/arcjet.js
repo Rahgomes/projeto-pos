@@ -11,7 +11,7 @@ const aj = arcjet({
   blockResponseBody:
     "Request blocked due to suspicious activity. Please try again later.",
   characteristics: ["ip.src"],
-  logLevel: isProduction ? "warn" : "info",
+  logLevel: isProduction ? "warn" : "error",
   log: logger,
   rules: [
     shield({ mode: isProduction ? "LIVE" : "DRY_RUN" }),
