@@ -1,5 +1,6 @@
 import arcjet, { shield, detectBot, tokenBucket } from "@arcjet/node";
 import { ARCJET_KEY, NODE_ENV } from "./env.js";
+import logger from "./logger.js";
 
 const isProduction = NODE_ENV === "production";
 
@@ -9,8 +10,9 @@ const aj = arcjet({
   blockResponseStatusCode: 429,
   blockResponseBody:
     "Request blocked due to suspicious activity. Please try again later.",
-  characteristics: ["ip.src", "http.headers.user-agent"],
+  characteristics: ["ip.src"],
   logLevel: isProduction ? "warn" : "info",
+  log: logger,
   rules: [
     shield({ mode: isProduction ? "LIVE" : "DRY_RUN" }),
     detectBot({
@@ -25,7 +27,7 @@ const aj = arcjet({
     }),
   ],
   onBlock: (ctx) => {
-    console.warn(`Blocked request from ${ctx.characteristics["ip.src"]}`);
+    logger.warn(`Blocked request from ${ctx.characteristics["ip.src"]}`);
   },
 });
 
