@@ -6,6 +6,7 @@ import {
   ERROR_MESSAGES,
   SUBSCRIPTION_MESSAGES,
   VALIDATION_MESSAGES,
+  USER_MESSAGES,
 } from "./messages.js";
 
 import {
@@ -15,6 +16,8 @@ import {
   CATEGORIES,
   STATUSES,
 } from "./subscription.constants.js";
+
+import { REGEX } from "./regex.constants.js";
 
 export {
   HTTP_STATUS,
@@ -27,4 +30,6 @@ export {
   FREQUENCIES,
   CATEGORIES,
   STATUSES,
+  REGEX,
+  USER_MESSAGES,
 };
