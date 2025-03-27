@@ -1,4 +1,4 @@
-import { RENEWAL_PERIODS, STATUSES } from "../constants";
+import { RENEWAL_PERIODS, STATUSES } from "../constants/index.js";
 
 export const calculateRenewalDate = (subscription) => {
   if (!subscription.renewalDate) {

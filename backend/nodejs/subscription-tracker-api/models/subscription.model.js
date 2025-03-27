@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import attachSubscriptionHooks from "../hooks/subscription.hooks";
+import attachSubscriptionHooks from "../hooks/subscription.hooks.js";
 import {
   CURRENCIES,
   FREQUENCIES,
